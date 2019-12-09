@@ -1,19 +1,19 @@
 
-fan.afMarsApp.RecaptchaClientPeer = fan.sys.Obj.$extend(fan.sys.Obj);
+fan.afRecaptcha.RecaptchaClientPeer = fan.sys.Obj.$extend(fan.sys.Obj);
 
-fan.afMarsApp.RecaptchaClientPeer.prototype.$ctor = function(self) {}
+fan.afRecaptcha.RecaptchaClientPeer.prototype.$ctor = function(self) {}
 
-fan.afMarsApp.RecaptchaClientPeer.prototype.iAmHere = function(self) {
+fan.afRecaptcha.RecaptchaClientPeer.prototype.iAmHere = function(self) {
 	if (typeof afRecapture === "undefined") afRecapture = {};
 	afRecapture.instance = self;
 }
 
-fan.afMarsApp.RecaptchaClientPeer.prototype.hasLoaded = function(self) {
+fan.afRecaptcha.RecaptchaClientPeer.prototype.hasLoaded = function(self) {
 	if (typeof afRecapture === "undefined") afRecapture = {};
 	return afRecapture.loaded == true;
 }
 
-fan.afMarsApp.RecaptchaClientPeer.prototype.doRender = function(self, containerId, fanParams) {
+fan.afRecaptcha.RecaptchaClientPeer.prototype.doRender = function(self, containerId, fanParams) {
 	var params = {};
 	if (fanParams != null)
 		fanParams.$each(function(b) {
@@ -29,6 +29,6 @@ fan.afMarsApp.RecaptchaClientPeer.prototype.doRender = function(self, containerI
 	return widgetId;
 }
 
-fan.afMarsApp.RecaptchaClientPeer.prototype.doReset = function(self, widgetId) {
+fan.afRecaptcha.RecaptchaClientPeer.prototype.doReset = function(self, widgetId) {
 	grecaptcha.reset(widgetId);
 }

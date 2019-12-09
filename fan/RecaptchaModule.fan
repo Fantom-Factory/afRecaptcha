@@ -3,7 +3,7 @@ using afIoc::Configuration
 using afIoc::RegistryBuilder
 using afIocConfig::FactoryDefaults
 
-const class RecaptureModule {
+const class RecaptchaModule {
 	
 	Void defineServices(RegistryBuilder bob) {
 		bob.addService(RecaptchaServer#)
