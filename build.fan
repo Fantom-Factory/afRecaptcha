@@ -4,7 +4,7 @@ class Build : BuildPod {
 
 	new make() {
 		podName = "afRecaptcha"
-		summary = "My Awesome recapture project"
+		summary = "My Awesome recaptcha project"
 		version = Version("0.0.1")
 
 		meta = [

@@ -7,11 +7,11 @@ using util::JsonInStream
 const class RecaptchaServer {
 	@Inject private const HtmlInjector	injector
 	@Inject	private const Log			log
-	@Config { id="afRecapture.verifyUrl" }
+	@Config { id="afRecaptcha.verifyUrl" }
 			private const Uri			verifyUrl
-	@Config { id="afRecapture.secretKey" }
+	@Config { id="afRecaptcha.secretKey" }
 			private const Str			secretKey
-	@Config { id="afRecapture.enabled" }
+	@Config { id="afRecaptcha.enabled" }
 			private const Bool			enabled
 	
 	new make(|This| f) { f(this) }
@@ -20,21 +20,21 @@ const class RecaptchaServer {
 		if (!enabled) return
 		
 		injector.injectScript.withScript(
-		"""function afRecaptureOnLoadCallback() { 
-		    if (typeof afRecapture === "undefined") afRecapture = {};
-		    afRecapture.loaded = true;
-		    if (afRecapture.instance != null)
-		        afRecapture.instance.onLoad();
+		"""function afRecaptchaOnLoadCallback() { 
+		    if (typeof afRecaptcha === "undefined") afRecaptcha = {};
+		    afRecaptcha.loaded = true;
+		    if (afRecaptcha.instance != null)
+		        afRecaptcha.instance.onLoad();
 		   }"""
 		)
-		injector.injectScript.fromExternalUrl(`https://www.google.com/recaptcha/api.js?render=explicit&onload=afRecaptureOnLoadCallback`).async.defer
+		injector.injectScript.fromExternalUrl(`https://www.google.com/recaptcha/api.js?render=explicit&onload=afRecaptchaOnLoadCallback`).async.defer
 	}
 
-	Bool verifyCapture(Str? response, Bool checked := true) {
+	Bool verifyCaptcha(Str? response, Bool checked := true) {
 		resp := null as Str:Obj?
 		
 		if (response?.trimToNull == null)
-			return !checked ? false : throw Err("No reCAPTURE given")
+			return !checked ? false : throw Err("No reCAPTCHA given")
 
 		if (enabled) {
 			json := WebClient(verifyUrl).postForm([
@@ -52,8 +52,8 @@ const class RecaptchaServer {
 
 		if (resp.containsKey("error-codes") && resp["error-codes"] != null)
 			// error codes aren't a 500 from Google, but things like
-			// Bad reCAPTURE response - [timeout-or-duplicate]
-			return !checked ? false : throw Err("Bad reCAPTURE response - " + resp["error-codes"])
+			// Bad reCAPTCHA response - [timeout-or-duplicate]
+			return !checked ? false : throw Err("Bad reCAPTCHA response - " + resp["error-codes"])
 		
 		success := resp["success"]
 		if (!success && checked)

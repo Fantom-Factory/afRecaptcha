@@ -11,9 +11,9 @@ const class RecaptchaModule {
 	
 	@Contribute { serviceType=FactoryDefaults# }
 	Void contributeFactoryDefaults(Configuration config) {
-		config["afRecapture.enabled"]	= false
-		config["afRecapture.verifyUrl"]	= `https://www.google.com/recaptcha/api/siteverify`
-		config["afRecapture.siteKey"]	= "XXXX"
-		config["afRecapture.secretKey"]	= "XXXX"
+		config["afRecaptcha.enabled"]	= false
+		config["afRecaptcha.verifyUrl"]	= `https://www.google.com/recaptcha/api/siteverify`
+		config["afRecaptcha.siteKey"]	= "XXXX"
+		config["afRecaptcha.secretKey"]	= "XXXX"
 	}
 }

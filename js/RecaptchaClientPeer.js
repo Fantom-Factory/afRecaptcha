@@ -4,13 +4,13 @@ fan.afRecaptcha.RecaptchaClientPeer = fan.sys.Obj.$extend(fan.sys.Obj);
 fan.afRecaptcha.RecaptchaClientPeer.prototype.$ctor = function(self) {}
 
 fan.afRecaptcha.RecaptchaClientPeer.prototype.iAmHere = function(self) {
-	if (typeof afRecapture === "undefined") afRecapture = {};
-	afRecapture.instance = self;
+	if (typeof afRecaptcha === "undefined") afRecaptcha = {};
+	afRecaptcha.instance = self;
 }
 
 fan.afRecaptcha.RecaptchaClientPeer.prototype.hasLoaded = function(self) {
-	if (typeof afRecapture === "undefined") afRecapture = {};
-	return afRecapture.loaded == true;
+	if (typeof afRecaptcha === "undefined") afRecaptcha = {};
+	return afRecaptcha.loaded == true;
 }
 
 fan.afRecaptcha.RecaptchaClientPeer.prototype.doRender = function(self, containerId, fanParams) {
