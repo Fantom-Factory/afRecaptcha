@@ -4,6 +4,9 @@ using afDuvet::HtmlInjector
 using web::WebClient
 using util::JsonInStream
 
+**
+** To edit or view your reCAPTCHA account, visit `https://www.google.com/recaptcha/admin/`.
+** 
 const class RecaptchaServer {
 	@Inject private const HtmlInjector	injector
 	@Inject	private const Log			log

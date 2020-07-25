@@ -3,6 +3,7 @@ using afIoc::Configuration
 using afIoc::RegistryBuilder
 using afIocConfig::FactoryDefaults
 
+@NoDoc
 const class RecaptchaModule {
 	
 	Void defineServices(RegistryBuilder bob) {

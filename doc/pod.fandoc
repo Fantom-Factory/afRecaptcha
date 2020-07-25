@@ -1,9 +1,70 @@
 
 Overview
 ********
-afRecaptcha - My Awesome reCAPTCHA project
+Client and Server code to process Google reCAPTCHA responses.
 
-[reCAPTCHA Docs]`https://developers.google.com/recaptcha`
+Requires a Google account and reCAPTCHA to be configured on the Admin screen. See:
+ - [Google reCAPTCHA Docs]`https://developers.google.com/recaptcha`
+ - [Google reCAPTCHA Admin]`https://www.google.com/recaptcha/admin/`
 
-[reCAPTCHA Admin]`https://www.google.com/recaptcha/admin/`
+
+
+Quick Start
+***********
+Client side code:
+
+pre>
+syntax: fantom
+using afRecaptcha::RecaptchaClient
+
+...
+
+siteKey     := "..."    // siteKey = your unique Google reCAPTCHA key
+enabled     := true     // enabled = false to disable reCAPTCHA during dev
+recaptcha   := RecaptchaClient(siteKey, enabled)
+
+...
+
+containerId := "divId"  // id of where reCAPTCHA is to be rendered
+recaptchaId := recaptcha.render(containerId)
+
+...
+
+response    := recaptcha.getResponse(recaptchaId)
+if (response == null)
+    Win.cur.alert("If you're a human, complete the captcha!")
+else
+    // set a hidden form value to send response to the Server
+    doc.elemById("recaptchaInput").setAttr("value", response)
+<pre
+
+Then when processing form values on the server:
+
+pre>
+syntax: fantom
+using afIoc::Inject
+using afBedSheet::HttpRequest
+using afEfanXtra::BeforeRender
+using afRecaptcha::RecaptchaServer
+...
+
+@Inject const HttpRequest      httpReq
+@Inject const RecaptchaServer  recaptcha
+
+@BeforeRender
+Void onBeforeRender() {
+    // inject Google reCAPTCHA scripts into the page
+    recaptcha.setupCaptcha()
+}
+
+Void onProcessForm() {
+    // grab the reCAPTCHA response from the form
+    response := httpReq.body.form["recaptchaInput"]
+
+    // verify it with Google
+    success  := recaptcha.verifyCaptcha(response, false)
+    if (success == false)
+        throw Err("reCAPTRUE failed")
+}
+<pre
 

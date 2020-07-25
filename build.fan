@@ -4,11 +4,11 @@ class Build : BuildPod {
 
 	new make() {
 		podName = "afRecaptcha"
-		summary = "My Awesome recaptcha project"
-		version = Version("0.0.3")
+		summary = "Client and Server code to process Google reCAPTCHA responses"
+		version = Version("0.0.4")
 
 		meta = [
-			"pod.dis"		: "ReCAPTCHA",
+			"pod.dis"		: "Google ReCAPTCHA",
 			"repo.tags"		: "web",
 			"repo.public"	: "true",
 			"repo.internal"	: "true",
