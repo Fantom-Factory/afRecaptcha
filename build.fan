@@ -5,7 +5,7 @@ class Build : BuildPod {
 	new make() {
 		podName = "afRecaptcha"
 		summary = "Client and Server code to process Google reCAPTCHA responses"
-		version = Version("0.0.4")
+		version = Version("0.0.5")
 
 		meta = [
 			"pod.dis"		: "Google ReCAPTCHA",
